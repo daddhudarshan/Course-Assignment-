@@ -12,10 +12,14 @@ sudo systemctl start apache2
 sudo systemctl enable apache2
 fi
 echo "Tar file creating"
-tar cvzf darshan-httpd-logs-02820021.101010.tar tmp/
+date_time=$(date '+%d%m%Y-%H%M%S')
+myname='darshan'
+s3_bucket='upgard-darshan09'
+
+tar cvzf ${myname}-httpd-logs-${date_time}.tar 
 
 
-aws s3  cp  darshan-httpd-logs-02820021.101010.tar s3://upgard-darshan09
+aws s3  cp  ${myname}-httpd-logs-${date_time}.tar s3://4{s3_bucket}/${myname}-httpd-logs-${date_time}.tar
 echo " Tar uploaded to s3 bucket" 
 
 cat  inventory.html
